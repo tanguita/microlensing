@@ -11,10 +11,10 @@ class microlens(object):
 
         """initialization, input is tE, U0, fs and t0"""
         
-        self.tE = float(kwargs["tE"])
-        self.U0 = float(kwargs["U0"])
-        self.fs = float(kwargs["fs"])
-        self.t0 = float(kwargs["t0"])
+        self.tE = kwargs["tE"]
+        self.U0 = kwargs["U0"]
+        self.fs = kwargs["fs"]
+        self.t0 = kwargs["t0"]
 
     # evaluate in given time array
     def eval(self, times):
@@ -39,10 +39,10 @@ class microlens_pars(object):
         
         self.parsfile = kwargs["parsfile"]
 
-        df = pd.read_csv(self.parsfile, sep = "\s+")
-        self.tEvals = np.array(df.tE)
-        self.U0vals = np.array(df.U0)
-        self.fsvals = np.array(df.fs)
+        df = pd.read_csv(self.parsfile, sep = "\s+", comment = "#")
+        self.tEvals = np.array(df.tE, dtype = float)
+        self.U0vals = np.array(df.U0, dtype = float)
+        self.fsvals = np.array(df.fs, dtype = float)
         self.idx = np.array(range(len(self.tEvals)), dtype = int)
         
 
